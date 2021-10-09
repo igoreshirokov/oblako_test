@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "/projects", to: "project#index"
   # POST /todos — создать новую задачу;
   post "/todos", to: "todo#new"
+  post "/projects", to: "project#new"
   # PATCH /projects/id/todo/id — обновить задачу.
   patch "/projects/:projectid/todos/:todoid", to: "todo#edit"
 

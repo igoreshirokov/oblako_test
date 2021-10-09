@@ -1,4 +1,5 @@
 class TodoController < ApplicationController
+
   def new
     if !params[:text].blank?
       @text = params[:text]

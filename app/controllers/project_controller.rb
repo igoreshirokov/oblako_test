@@ -21,4 +21,48 @@ class ProjectController < ApplicationController
     end
     render json: res
   end
+
+  def new     
+    if !params[:title].blank?
+      @title=params[:title]
+      if !Project.exists?(@title)
+        begin
+          Project.create(title: @title)          
+        rescue 
+          render json: {status: 500, msg: 'Ошибка сервера. Проект не может быть создан!'}
+        else
+          render json: {status: 201, msg: 'Проект добавлен!'}
+        end
+      end
+    end
+  end
+
+    
+    # if !params[:text].blank?
+    #   @text = params[:text]
+    #   if !params[:projectId].blank?
+    #     @projectId = params[:projectId]
+    #     if Project.exists?(@projectId)
+    #       begin
+    #         Todo.create(
+    #             text: @text,
+    #             isCompleted: false,
+    #             projectId: @projectId
+    #           );
+    #         rescue 
+    #           render json: {status: 500, msg: 'Ошибка сервера. Запись не может быть создана!'}
+    #         else
+    #           render json: {status: 201, msg: 'Запись создана!'}
+    #       end
+    #     else
+    #       render json: {status: 404, msg: 'Категории с ID [' + @projectId + '] не существует!'}
+    #     end
+    #   else
+    #     render json: {status: 406, msg: 'Категория не указана!'}
+    #   end
+    # else
+    #   render json: {status: 400, msg: 'Пустое поле задачи!'}
+    # end
+
+
 end
